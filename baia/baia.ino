@@ -20,10 +20,10 @@
 LiquidCrystal_I2C lcd(LCD_ADDR, EN, RW, RS, D4, D5, D6, D7, BACKLIGHT_PIN, BACKLIGHT_POL);
 
 void setup() {
-  
+
   Serial.begin(9600);
   lcd.begin(COLUNAS,LINHAS);
-  
+
   pinMode (MOTION_SENSOR_PIN,INPUT);
 
   lcd.setCursor(0,0);
@@ -42,30 +42,34 @@ void loop(){
   //Lendo o valor do sensor PIR. Este sensor pode assumir 2 valores
   //1 quando detecta algum movimento e 0 quando não detecta.
   int valor_sensor = digitalRead(MOTION_SENSOR_PIN);
-  
+
   if (valor_sensor == HIGH){
     lcd.backlight();
-  }else{
-    lcd.noBacklight();
+    delay(500);
   }
-    
+  else{
+    lcd.noBacklight();
+    delay(500);
+  }
+
   //escrever_na_serial();
-  
+
 }
 
 void escrever_na_serial(){
-// when characters arrive over the serial port...
-    if (Serial.available()) {
-      // wait a bit for the entire message to arrive
-      delay(100);
-      // clear the screen
-      lcd.clear();
-      // read all the available characters
-      while (Serial.available() > 0) {
-        // display each character to the LCD
-        lcd.write(Serial.read());
-      }
+  // when characters arrive over the serial port...
+  if (Serial.available()) {
+    // wait a bit for the entire message to arrive
+    delay(100);
+    // clear the screen
+    lcd.clear();
+    // read all the available characters
+    while (Serial.available() > 0) {
+      // display each character to the LCD
+      lcd.write(Serial.read());
     }
+  }
 }
+
 
 
