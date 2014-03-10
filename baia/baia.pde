@@ -39,9 +39,6 @@ void loop(){
   int click_button1 = digitalRead(BUTTON1_PIN);
   int click_button2 = digitalRead(BUTTON2_PIN);
   int click_button3 = digitalRead(BUTTON3_PIN);
-  //int valor_temperatura_sensor = analogRead(TEMPERATURE_SENSOR_PIN);
-  
- //temperatura = (valor_temperatura_sensor * 0.00488) * 100;
   
   lcd.setCursor(0,0);  
   lcd.print("Baia de:");
@@ -50,6 +47,8 @@ void loop(){
 
   // click do botao 1
   if (click_button1 == HIGH){
+    int valor_temperatura_sensor = analogRead(TEMPERATURE_SENSOR_PIN);
+    temperatura = valor_temperatura_sensor * 0.48828125;
     lcd.setCursor(0,0);  
     lcd.clear();
     lcd.print("Temperatura");    
